@@ -19,11 +19,11 @@ class Board
 	end
 
 	def circle_tateti?
-		tateti circle_player
+		tateti? circle_player
 	end
 
 	def cross_tateti?
-		tateti cross_player
+		tateti? cross_player
 	end
 
 	private
@@ -31,9 +31,11 @@ class Board
 	def cross_player
 		'X'
 	end
+
 	def circle_player
 		'0'
 	end
+	
 	def tateti?(player)
 		count = 0
 		@posiciones[0].each do |played_by|
