@@ -37,16 +37,13 @@ class Board
 	end
 	
 	def tateti?(player)
-		count = 0
-		@posiciones[0].each do |played_by|
-			count+=1 if played_by == player
-		end	
-		return true if count == 3
-		count = 0
-		@posiciones[1].each do |played_by|
-			count+=1 if played_by == player
-		end	
-		count == 3
+		count = [0,0,0]
+		@posiciones.each_with_index do |line, index|
+			line.each do |played_by|
+				count[index]+=1 if played_by == player
+			end	
+		end
+		count.include? 3
 	end
 
 	def plays_at(player, x, y)
