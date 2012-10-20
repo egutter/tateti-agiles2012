@@ -19,11 +19,11 @@ class Board
 	end
 
 	def circle_tateti?
-		tateti? circle_player
+		tateti_line?(circle_player) || tateti_col?(circle_player)
 	end
 
 	def cross_tateti?
-		tateti? cross_player
+		tateti_line?(cross_player) || tateti_col?(cross_player)
 	end
 
 	private
@@ -36,12 +36,21 @@ class Board
 		'0'
 	end
 	
-	def tateti?(player)
+	def tateti_line?(player)
 		count = [0,0,0]
 		@posiciones.each_with_index do |line, index|
 			line.each do |played_by|
 				count[index]+=1 if played_by == player
 			end	
+		end
+		count.include? 3
+	end
+	def tateti_col?(player)
+		count = [0,0,0]
+		(0..2).each do |col_num|
+			@posiciones.each_with_index do |line, index|			
+				count[col_num]+=1 if line[col_num] == player
+			end
 		end
 		count.include? 3
 	end
@@ -87,65 +96,69 @@ describe "Tateti" do
 	end
 
 	context "ta-te-ti" do
-		context "en 1er linea horizontal" do
-			it "es tateti para circulo" do
-				# 0 | 0 | 0
-				# X | X | 
-				#   |   | 
+		[0, 1].each do |linea|
+			context "en linea nro #{linea}" do
+				it "es tateti para circulo" do
+					# 0 | 0 | 0
+					# X | X | 
+					#   |   | 
 
-				board.circle_plays_at(0,0)
-				board.cross_plays_at(1,0)
-				board.circle_plays_at(0,1)
-				board.cross_plays_at(1,1)
-				board.circle_plays_at(0,2)
+					board.circle_plays_at(linea,0)
+					board.cross_plays_at(linea+1,0)
+					board.circle_plays_at(linea,1)
+					board.cross_plays_at(linea+1,1)
+					board.circle_plays_at(linea,2)
 
-				board.circle_tateti?.should == true
-				board.cross_tateti?.should == false
+					board.circle_tateti?.should == true
+					board.cross_tateti?.should == false
+				end
+				it "es tateti para cruz" do
+					# X | X | X
+					# 0 | 0 | 
+					#   |   | 
+
+					board.cross_plays_at(linea,0)
+					board.circle_plays_at(linea+1,0)
+					board.cross_plays_at(linea,1)
+					board.circle_plays_at(linea+1,1)
+					board.cross_plays_at(linea,2)
+
+					board.circle_tateti?.should == false
+					board.cross_tateti?.should == true
+				end			
 			end
-			it "es tateti para cruz" do
-				# X | X | X
-				# 0 | 0 | 
-				#   |   | 
+		end		
+		[0, 1].each do |columna|
+			context "en columna nro #{columna}" do
+				it "es tateti para circulo" do
+					# 0 | X | 
+					# 0 | X | 
+					# 0 |   | 
 
-				board.cross_plays_at(0,0)
-				board.circle_plays_at(1,0)
-				board.cross_plays_at(0,1)
-				board.circle_plays_at(1,1)
-				board.cross_plays_at(0,2)
+					board.circle_plays_at(0, columna)
+					board.cross_plays_at(0, columna+1)
+					board.circle_plays_at(1, columna)
+					board.cross_plays_at(1,columna+1)
+					board.circle_plays_at(2, columna)
 
-				board.circle_tateti?.should == false
-				board.cross_tateti?.should == true
-			end			
-		end
-		context "en 2da linea horizontal" do
-			it "es tateti para circulo" do
-				# X | X | 
-				# 0 | 0 | 0
-				#   |   | 
+					board.circle_tateti?.should == true
+					board.cross_tateti?.should == false
+				end
+				it "es tateti para cruz" do
+					# X | 0 | 
+					# X | 0 | 
+					# X |   | 
 
-				board.circle_plays_at(1,0)
-				board.cross_plays_at(0,0)
-				board.circle_plays_at(1,1)
-				board.cross_plays_at(0,1)
-				board.circle_plays_at(1,2)
+					board.cross_plays_at(0,columna)
+					board.circle_plays_at(0, columna+1)
+					board.cross_plays_at(1,columna)
+					board.circle_plays_at(1,columna+1)
+					board.cross_plays_at(2,columna)
 
-				board.circle_tateti?.should == true
-				board.cross_tateti?.should == false
+					board.circle_tateti?.should == false
+					board.cross_tateti?.should == true
+				end			
 			end
-			it "es tateti para cruz" do
-				# 0 | 0 | 
-				# X | X | X
-				#   |   | 
-
-				board.cross_plays_at(1,0)
-				board.circle_plays_at(0,0)
-				board.cross_plays_at(1,1)
-				board.circle_plays_at(0,1)
-				board.cross_plays_at(1,2)
-
-				board.circle_tateti?.should == false
-				board.cross_tateti?.should == true
-			end			
 		end
 	end
 
