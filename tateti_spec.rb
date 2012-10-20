@@ -19,11 +19,19 @@ class Board
 	end
 
 	def circle_tateti?
-		true	
+		circle = 0
+		@posiciones[0].each do |player|
+			circle+=1 if player == '0'
+		end	
+		circle == 3
 	end
 
 	def cross_tateti?
-		false
+		cross = 0
+		@posiciones[0].each do |player|
+			cross+=1 if player == 'X'
+		end	
+		cross == 3
 	end
 
 	private
@@ -69,19 +77,35 @@ describe "Tateti" do
 	end
 
 	context "ta-te-ti" do
-		it "es tateti" do
-			# 0 | 0 | 0
-			# X | X | 
-			#   |   | 
+		context "en linea horizontal" do
+			it "es tateti para circulo" do
+				# 0 | 0 | 0
+				# X | X | 
+				#   |   | 
 
-			board.circle_plays_at(0,0)
-			board.cross_plays_at(1,0)
-			board.circle_plays_at(0,1)
-			board.cross_plays_at(1,1)
-			board.circle_plays_at(0,2)
+				board.circle_plays_at(0,0)
+				board.cross_plays_at(1,0)
+				board.circle_plays_at(0,1)
+				board.cross_plays_at(1,1)
+				board.circle_plays_at(0,2)
 
-			board.circle_tateti?.should == true
-			board.cross_tateti?.should == false
+				board.circle_tateti?.should == true
+				board.cross_tateti?.should == false
+			end
+			it "es tateti para cruz" do
+				# X | X | X
+				# 0 | 0 | 
+				#   |   | 
+
+				board.cross_plays_at(0,0)
+				board.circle_plays_at(1,0)
+				board.cross_plays_at(0,1)
+				board.circle_plays_at(1,1)
+				board.cross_plays_at(0,2)
+
+				board.circle_tateti?.should == false
+				board.cross_tateti?.should == true
+			end			
 		end
 	end
 
