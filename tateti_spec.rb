@@ -11,30 +11,36 @@ class Board
 
 	def cross_plays_at(x, y)
 		@empty = false
-		plays_at('X', x, y)
+		plays_at(cross_player, x, y)
 	end
 
 	def circle_plays_at(x, y)
-		plays_at('0', x, y)
+		plays_at(circle_player, x, y)
 	end
 
 	def circle_tateti?
-		circle = 0
-		@posiciones[0].each do |player|
-			circle+=1 if player == '0'
-		end	
-		circle == 3
+		tateti circle_player
 	end
 
 	def cross_tateti?
-		cross = 0
-		@posiciones[0].each do |player|
-			cross+=1 if player == 'X'
-		end	
-		cross == 3
+		tateti cross_player
 	end
 
 	private
+
+	def cross_player
+		'X'
+	end
+	def circle_player
+		'0'
+	end
+	def tateti?(player)
+		count = 0
+		@posiciones[0].each do |played_by|
+			count+=1 if played_by == player
+		end	
+		count == 3
+	end
 
 	def plays_at(player, x, y)
 		raise PosicionOcupadaError.new('el lugar esta ocupado') unless @posiciones[x][y].nil?
