@@ -41,12 +41,17 @@ class Board
 		@posiciones[0].each do |played_by|
 			count+=1 if played_by == player
 		end	
+		return true if count == 3
+		count = 0
+		@posiciones[1].each do |played_by|
+			count+=1 if played_by == player
+		end	
 		count == 3
 	end
 
 	def plays_at(player, x, y)
 		raise PosicionOcupadaError.new('el lugar esta ocupado') unless @posiciones[x][y].nil?
-		@posiciones[x][y] = player		
+		@posiciones[x][y] = player
 	end
 end
 
@@ -85,7 +90,7 @@ describe "Tateti" do
 	end
 
 	context "ta-te-ti" do
-		context "en linea horizontal" do
+		context "en 1er linea horizontal" do
 			it "es tateti para circulo" do
 				# 0 | 0 | 0
 				# X | X | 
@@ -110,6 +115,36 @@ describe "Tateti" do
 				board.cross_plays_at(0,1)
 				board.circle_plays_at(1,1)
 				board.cross_plays_at(0,2)
+
+				board.circle_tateti?.should == false
+				board.cross_tateti?.should == true
+			end			
+		end
+		context "en 2da linea horizontal" do
+			it "es tateti para circulo" do
+				# X | X | 
+				# 0 | 0 | 0
+				#   |   | 
+
+				board.circle_plays_at(1,0)
+				board.cross_plays_at(0,0)
+				board.circle_plays_at(1,1)
+				board.cross_plays_at(0,1)
+				board.circle_plays_at(1,2)
+
+				board.circle_tateti?.should == true
+				board.cross_tateti?.should == false
+			end
+			it "es tateti para cruz" do
+				# 0 | 0 | 
+				# X | X | X
+				#   |   | 
+
+				board.cross_plays_at(1,0)
+				board.circle_plays_at(0,0)
+				board.cross_plays_at(1,1)
+				board.circle_plays_at(0,1)
+				board.cross_plays_at(1,2)
 
 				board.circle_tateti?.should == false
 				board.cross_tateti?.should == true
