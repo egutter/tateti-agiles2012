@@ -2,7 +2,7 @@ class Board
 
 	def initialize
 		@empty = true
-		@posiciones = [[]]
+		@posiciones = [[], [], []]
 	end
 
 	def empty?
@@ -10,14 +10,27 @@ class Board
 	end
 
 	def cross_plays_at(x, y)
-		raise PosicionOcupadaError.new('el lugar esta ocupado') unless @posiciones[x][y].nil?
 		@empty = false
-		@posiciones[x][y] = 'X'
+		plays_at('X', x, y)
 	end
 
 	def circle_plays_at(x, y)
+		plays_at('0', x, y)
+	end
+
+	def circle_tateti?
+		true	
+	end
+
+	def cross_tateti?
+		false
+	end
+
+	private
+
+	def plays_at(player, x, y)
 		raise PosicionOcupadaError.new('el lugar esta ocupado') unless @posiciones[x][y].nil?
-		@posiciones[x][y] = '0'		
+		@posiciones[x][y] = player		
 	end
 end
 
@@ -53,7 +66,23 @@ describe "Tateti" do
 				board.cross_plays_at(0,0)
 			}.to raise_error(PosicionOcupadaError)
 		end
+	end
 
+	context "ta-te-ti" do
+		it "es tateti" do
+			# 0 | 0 | 0
+			# X | X | 
+			#   |   | 
+
+			board.circle_plays_at(0,0)
+			board.cross_plays_at(1,0)
+			board.circle_plays_at(0,1)
+			board.cross_plays_at(1,1)
+			board.circle_plays_at(0,2)
+
+			board.circle_tateti?.should == true
+			board.cross_tateti?.should == false
+		end
 	end
 
 end
