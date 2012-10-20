@@ -43,7 +43,7 @@ class Board
 				count[index]+=1 if played_by == player
 			end	
 		end
-		count.include? 2
+		count.include? 3
 	end
 
 	def plays_at(player, x, y)
