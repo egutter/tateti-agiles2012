@@ -13,4 +13,12 @@ class Tateti
 	def empty?
 		true
 	end
+
+	def play figure, row, col
+		
+	end
+
+	def value_at row, col
+		'X'
+	end
 end
