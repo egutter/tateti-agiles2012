@@ -36,4 +36,19 @@ public class TatetiTest {
 
         tateti.set(1, -1, 'O');
     }
+
+    @Test(expected = IllegalTatetiPositionException.class)
+    public void shouldThrowExceptionIfSetOutOfBoundXPosition() {
+        Tateti tateti = new Tateti();
+
+        tateti.set(3, 1, 'X');
+    }
+
+    @Test(expected = IllegalTatetiPositionException.class)
+    public void shouldThrowExceptionIfSetOutOfBoundYPosition() {
+        Tateti tateti = new Tateti();
+
+        tateti.set(1, 3, 'O');
+    }
+
 }

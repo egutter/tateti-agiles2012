@@ -8,7 +8,7 @@ public class Tateti {
     }
 
     public void set(int x, int y, char type) {
-        if (x < 0 || y < 0) throw new IllegalTatetiPositionException();
+        if (x < 0 || y < 0 || x >= 3 || y >= 3 ) throw new IllegalTatetiPositionException();
 
         juego[x][y] = type;
     }
