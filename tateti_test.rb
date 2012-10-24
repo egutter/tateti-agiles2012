@@ -25,6 +25,7 @@ class Tablero
 	
 	def initialize
 		@@vacio = true
+		@@board = [[""],[""],[""]]
 	end
 
 	def vacio?
@@ -33,5 +34,6 @@ class Tablero
 
 	def insertar(ficha, pos_x, pos_y)
 		@@vacio = false
+		@@board[pos_x,pos_y] = ficha
 	end
 end
