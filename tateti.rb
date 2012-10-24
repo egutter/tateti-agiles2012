@@ -9,4 +9,8 @@ class Tateti
 	def rows
 		3
 	end
+
+	def empty?
+		true
+	end
 end
