@@ -18,4 +18,8 @@ public class Tateti {
     public char getAt(Coordinate coordinate) {
         return juego[coordinate.getX()][coordinate.getY()];
     }
+
+    public void set(Coordinate coordinate, Type type) {
+        set(coordinate, type.getType());
+    }
 }

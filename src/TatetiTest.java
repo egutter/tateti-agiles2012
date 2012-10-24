@@ -11,7 +11,7 @@ public class TatetiTest {
 
         Coordinate coordinate = new Coordinate(2, 2);
 
-        tateti.set(coordinate, 'X');
+        tateti.set(coordinate, Type.X);
 
         assertThat(tateti.getAt(coordinate), is('X'));
     }
