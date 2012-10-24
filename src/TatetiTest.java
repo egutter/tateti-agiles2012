@@ -20,37 +20,47 @@ public class TatetiTest {
     public void shouldSetAndKeepPositionIfItIsY() {
         Tateti tateti = new Tateti();
 
-        tateti.set(1, 1, 'O');
+        Coordinate coordinate = new Coordinate(1, 1);
 
-        assertThat(tateti.getAt(1, 1), is('O'));
+        tateti.set(coordinate, 'O');
+
+        assertThat(tateti.getAt(coordinate), is('O'));
     }
 
     @Test(expected = IllegalTatetiPositionException.class)
     public void shouldThrowExceptionIfSettingNegativeXPosition() {
         Tateti tateti = new Tateti();
 
-        tateti.set(-1, 1, 'X');
+        Coordinate coordinate = new Coordinate(-1, 1);
+
+        tateti.set(coordinate, 'X');
     }
 
     @Test(expected = IllegalTatetiPositionException.class)
     public void shouldThrowExceptionIfSettingNegativeYPosition() {
         Tateti tateti = new Tateti();
 
-        tateti.set(1, -1, 'O');
+        Coordinate coordinate = new Coordinate(1, -1);
+
+        tateti.set(coordinate, 'O');
     }
 
     @Test(expected = IllegalTatetiPositionException.class)
     public void shouldThrowExceptionIfSetOutOfBoundXPosition() {
         Tateti tateti = new Tateti();
 
-        tateti.set(3, 1, 'X');
+        Coordinate coordinate = new Coordinate(3, 1);
+
+        tateti.set(coordinate, 'X');
     }
 
     @Test(expected = IllegalTatetiPositionException.class)
     public void shouldThrowExceptionIfSetOutOfBoundYPosition() {
         Tateti tateti = new Tateti();
 
-        tateti.set(1, 3, 'O');
+        Coordinate coordinate = new Coordinate(1, 3);
+
+        tateti.set(coordinate, 'O');
     }
 
 }
