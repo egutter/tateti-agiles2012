@@ -13,7 +13,7 @@ public class TatetiTest {
 
         tateti.set(coordinate, Type.X);
 
-        assertThat(tateti.getAt(coordinate), is('X'));
+        assertThat(tateti.getAt(coordinate), is(Type.X));
     }
 
     @Test
@@ -22,9 +22,9 @@ public class TatetiTest {
 
         Coordinate coordinate = new Coordinate(1, 1);
 
-        tateti.set(coordinate, 'O');
+        tateti.set(coordinate, Type.O);
 
-        assertThat(tateti.getAt(coordinate), is('O'));
+        assertThat(tateti.getAt(coordinate), is(Type.O));
     }
 
     @Test(expected = IllegalTatetiPositionException.class)
@@ -33,7 +33,7 @@ public class TatetiTest {
 
         Coordinate coordinate = new Coordinate(-1, 1);
 
-        tateti.set(coordinate, 'X');
+        tateti.set(coordinate, Type.X);
     }
 
     @Test(expected = IllegalTatetiPositionException.class)
@@ -42,7 +42,7 @@ public class TatetiTest {
 
         Coordinate coordinate = new Coordinate(1, -1);
 
-        tateti.set(coordinate, 'O');
+        tateti.set(coordinate, Type.O);
     }
 
     @Test(expected = IllegalTatetiPositionException.class)
@@ -51,7 +51,7 @@ public class TatetiTest {
 
         Coordinate coordinate = new Coordinate(3, 1);
 
-        tateti.set(coordinate, 'X');
+        tateti.set(coordinate, Type.X);
     }
 
     @Test(expected = IllegalTatetiPositionException.class)
@@ -60,7 +60,7 @@ public class TatetiTest {
 
         Coordinate coordinate = new Coordinate(1, 3);
 
-        tateti.set(coordinate, 'O');
+        tateti.set(coordinate, Type.O);
     }
 
 }
