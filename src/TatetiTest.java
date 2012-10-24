@@ -18,8 +18,15 @@ public class TatetiTest {
     public void shouldSetAndKeepPositionIfItIsY() {
         Tateti tateti = new Tateti();
 
-        tateti.set(1, 1, 'Y');
+        tateti.set(1, 1, 'O');
 
-        assertThat(tateti.getAt(1, 1), is('Y'));
+        assertThat(tateti.getAt(1, 1), is('O'));
+    }
+
+    @Test(expected = IllegalTatetiPositionException.class)
+    public void shouldThrowExceptionIfSettingNegativeXPosition() {
+        Tateti tateti = new Tateti();
+
+        tateti.set(-1, 1, 'X');
     }
 }
