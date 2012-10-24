@@ -38,4 +38,9 @@ describe 'tateti' do
 		@board.value_at(1,4).should be nil
 	end
 
+	it "should not allow playing in row greater than 3" do
+		@board.new_game
+		@board.play '0', 4, 1
+		@board.value_at(4,1).should be nil
+	end
 end
