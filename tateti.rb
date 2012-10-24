@@ -16,7 +16,7 @@ class Tateti
 	end
 
 	def play figure, row, col
-		@board[row] = []
+		@board[row] = [] if @board[row].nil?
 		@board[row][col] = figure
 	end
 
