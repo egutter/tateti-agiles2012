@@ -6,4 +6,9 @@ describe 'tateti' do
 		board.respond_to?('new_game').should be_true
 	end
 
+	it "should be 3x3 dimension" do
+		board = Tateti.new
+		board.cols.should == 3
+		board.rows.should == 3
+	end
 end
