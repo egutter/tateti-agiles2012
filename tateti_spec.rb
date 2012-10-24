@@ -32,4 +32,10 @@ describe 'tateti' do
 		@board.value_at(1,1).should == '0'
 	end
 
+	it "should not allow playing in col greater than 3" do
+		@board.new_game
+		@board.play '0', 1, 4
+		@board.value_at(1,4).should be nil
+	end
+
 end

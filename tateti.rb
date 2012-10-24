@@ -16,7 +16,7 @@ class Tateti
 	end
 
 	def play figure, row, col
-		@board[row][col] = figure
+		@board[row][col] = figure if col < 4
 	end
 
 	def value_at row, col
