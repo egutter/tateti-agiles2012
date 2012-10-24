@@ -16,4 +16,12 @@ public class Tateti {
     public char getAt(int x, int y) {
         return juego[x][y];
     }
+
+    public void set(Coordinate coordinate, char type) {
+        set(coordinate.getX(), coordinate.getY(), type);
+    }
+
+    public char getAt(Coordinate coordinate) {
+        return getAt(coordinate.getX(), coordinate.getY());
+    }
 }

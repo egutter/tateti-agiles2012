@@ -9,9 +9,11 @@ public class TatetiTest {
     public void shouldSetAndKeepPositionIfItIsX() {
         Tateti tateti = new Tateti();
 
-        tateti.set(2, 2, 'X');
+        Coordinate coordinate = new Coordinate(2, 2);
 
-        assertThat(tateti.getAt(2, 2), is('X'));
+        tateti.set(coordinate, 'X');
+
+        assertThat(tateti.getAt(coordinate), is('X'));
     }
 
     @Test
