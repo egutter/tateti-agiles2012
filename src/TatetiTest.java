@@ -29,4 +29,11 @@ public class TatetiTest {
 
         tateti.set(-1, 1, 'X');
     }
+
+    @Test(expected = IllegalTatetiPositionException.class)
+    public void shouldThrowExceptionIfSettingNegativeYPosition() {
+        Tateti tateti = new Tateti();
+
+        tateti.set(1, -1, 'O');
+    }
 }
