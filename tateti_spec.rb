@@ -26,5 +26,11 @@ describe 'tateti' do
 		@board.value_at(1,1).should == 'X'
 	end
 
+	it "should allow play 0 in 1,1 cell" do
+		@board.new_game
+		@board.play '0', 1, 1
+		@board.value_at(1,1).should == '0'
+	end
+
 
 end
