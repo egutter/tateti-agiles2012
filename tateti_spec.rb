@@ -32,5 +32,4 @@ describe 'tateti' do
 		@board.value_at(1,1).should == '0'
 	end
 
-
 end

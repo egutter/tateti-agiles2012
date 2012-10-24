@@ -1,6 +1,6 @@
 class Tateti
 	def new_game
-		@board = [[]]
+		@board = [[],[],[]]
 	end
 
 	def cols
@@ -16,7 +16,6 @@ class Tateti
 	end
 
 	def play figure, row, col
-		@board[row] = [] if @board[row].nil?
 		@board[row][col] = figure
 	end
 
